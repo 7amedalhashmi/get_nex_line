@@ -1,5 +1,5 @@
 #include "get_next_line.h"
-#define BUFFER_SIZE 10
+
 char    *new_sbuf(char *sbuf)
 {
     int     i;
@@ -40,14 +40,14 @@ char    *return_new_line(char *sbuf)
     if (!ret_line)
         return (NULL);
     i = 0;
-    while (sbuf[i] && sbuf != '\n')
+    while (sbuf[i] && sbuf[i] != '\n')
     {
         ret_line[i] = sbuf[i];
         i++;
     }
     if (sbuf[i] == '\n')
     {
-        ret_line[i] == sbuf[i];
+        ret_line[i] = sbuf[i];
         i++;
     }
     ret_line[i] = '\0';

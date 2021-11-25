@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 size_t	ft_strlen(const char *c);
 char	*ft_strchr(const char *s, int c);
