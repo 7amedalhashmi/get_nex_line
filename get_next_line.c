@@ -71,7 +71,7 @@ char    *readl(int fd, char *sbuf)
             free(str);
             return (NULL);
         }
-        str[read_result] = '\n';
+        str[read_result] = '\0';
         sbuf = ft_strjoin(sbuf, str);
     }
     free (str);
