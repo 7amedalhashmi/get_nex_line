@@ -1,6 +1,5 @@
 #include "get_next_line.h"
 #define BUFFER_SIZE 10
-
 char    *new_sbuf(char *sbuf)
 {
     int     i;
