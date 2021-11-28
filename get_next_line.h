@@ -7,8 +7,8 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-size_t	ft_strlen(const char *c);
-char	*ft_strchr(const char *s, int c);
+size_t	ft_strlen(char *c);
+char	*ft_strchr(char *s, int c);
 char    *ft_strjoin(char *s1, char *s2);
 char    *new_sbuf(char *sbuf);
 char    *return_new_line(char *sbuf);
