@@ -1,20 +1,22 @@
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *c)
+size_t	ft_strlen(char *c)
 {
 	if (*c == 0)
 		return (0);
 	return (ft_strlen(c + 1) + 1);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
+	if (!s)
+		return (NULL);
 	while (*s)
 		if (*s++ == (char)c)
 			return ((char *)s - 1);
 	if (!c)
 		return ((char *)s);
-	return (NULL);
+	return ((char *) NULL);
 }
 
 char    *ft_strjoin(char *s1, char *s2)
@@ -36,10 +38,11 @@ char    *ft_strjoin(char *s1, char *s2)
 	i = -1;
 	j = 0;
 	if (s1)
-		while (s1[++i] != '\0')
-			str[i] = s1[i];
-	while (s2[i] != '\0')
-		str[i++] = s2[j++];
+		while (s1[i])
+			str[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		str[j++] = s2[i++];
 	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	free (s1);
 	return (str);

@@ -21,7 +21,7 @@ char    *new_sbuf(char *sbuf)
     j = 0;
     while (sbuf[i])
         new_buf[j++] = sbuf[i++];
-    new_buf[i] = '\0';
+    new_buf[j] = '\0';
     free (sbuf);
     return (new_buf);
 }
@@ -32,7 +32,7 @@ char    *return_new_line(char *sbuf)
     char    *ret_line;
 
     i = 0;
-    if (!sbuf)
+    if (!sbuf[i])
         return (NULL);
     while (sbuf[i] && sbuf[i] != '\n')
         i++;
@@ -66,9 +66,9 @@ char    *readl(int fd, char *sbuf)
     while (!ft_strchr(sbuf, '\n') && read_result > 0)
     {
         read_result = read(fd, str, BUFFER_SIZE);
-        if (read_result > 0)
+        if (read_result < 0)
         {
-            free(str);
+            free (str);
             return (NULL);
         }
         str[read_result] = '\0';
