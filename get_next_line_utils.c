@@ -30,19 +30,16 @@ char    *ft_strjoin(char *s1, char *s2)
 	}
 	if (!s1 || !s2)
 		return (NULL);
-	//str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2)) + 1 * sizeof(char));
 	if (!str)
 		return (NULL);
-	i = 0;
+	i = -1;
 	j = 0;
 	if (s1)
-		while (s1[i])
-			str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	//str[j] = 0;
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	while (s2[i] != '\0')
+		str[i++] = s2[j++];
 	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	free (s1);
 	return (str);
