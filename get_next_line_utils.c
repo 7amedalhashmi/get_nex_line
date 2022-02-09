@@ -2,9 +2,14 @@
 
 size_t	ft_strlen(char *c)
 {
-	if (*c == 0)
+	int i;
+
+	if (!c)
 		return (0);
-	return (ft_strlen(c + 1) + 1);
+	i = 0;
+	while (c[i])
+		i++;
+	return (i);
 }
 
 char	*ft_strchr(char *s, int c)
@@ -22,28 +27,27 @@ char	*ft_strchr(char *s, int c)
 char    *ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 
-	if (!s1)
-	{
-		s1 = (char *)malloc(1 * sizeof(char));
-		s1[0] = '\0';
-	}
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1 && !s2)
+		return (0);
+	i = 0;
+	j = 0;
 	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2)) + 1 * sizeof(char));
 	if (!str)
 		return (NULL);
-	i = -1;
-	j = 0;
 	if (s1)
-		while (s1[i])
-			str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	{
+		while (s1[i] != '\0')
+		{
+			str[i] = s1[i];
+			i++;
+		}
+	}
+	while (s2[j] != 0)
+		str[i++] = s2[j++];
+	str[i] = 0 ;
 	free (s1);
 	return (str);
 }

@@ -1,4 +1,6 @@
 #include "get_next_line.h"
+// #include "get_next_line_utils.c"
+
 
 char    *new_sbuf(char *sbuf)
 {
@@ -36,7 +38,7 @@ char    *return_new_line(char *sbuf)
         return (NULL);
     while (sbuf[i] && sbuf[i] != '\n')
         i++;
-    ret_line = (char *)malloc((i + 2) * sizeof(char));
+    ret_line = (char *)malloc((i + 1) * sizeof(char));
     if (!ret_line)
         return (NULL);
     i = 0;
@@ -56,25 +58,20 @@ char    *return_new_line(char *sbuf)
 
 char    *readl(int fd, char *sbuf)
 {
-    char    *str;
+    char    str[BUFFER_SIZE + 1];
     int     read_result;
 
-    str = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-    if (!str)
-        return (NULL);
+    // if (!str)
+    //     return (NULL);
     read_result = 1;
-    while (!ft_strchr(sbuf, '\n') && read_result > 0)
+    while (!ft_strchr(sbuf, '\n') && read_result != 0)
     {
         read_result = read(fd, str, BUFFER_SIZE);
         if (read_result < 0)
-        {
-            free (str);
             return (NULL);
-        }
         str[read_result] = '\0';
         sbuf = ft_strjoin(sbuf, str);
     }
-    free (str);
     return (sbuf);
 }
 
@@ -87,8 +84,20 @@ char    *get_next_line(int fd)
         return (NULL);
     sbuf = readl(fd, sbuf);
     if (!sbuf)
+    {
+        free (sbuf);
         return (NULL);
+    }
     ret_line = return_new_line(sbuf);
     sbuf = new_sbuf(sbuf);
     return (ret_line);
 }
+
+// int main()
+// {
+//     int fd = open ("file1", O_RDONLY);
+//     printf("%s", get_next_line(fd));
+//     printf("%s", get_next_line(fd));
+//     printf("%s", get_next_line(fd));
+
+// }
