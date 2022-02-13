@@ -7,8 +7,6 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-// # define BUFFER_SIZE 42
-
 size_t	ft_strlen(char *c);
 char	*ft_strchr(char *s, int c);
 char    *ft_strjoin(char *s1, char *s2);

@@ -1,6 +1,4 @@
 #include "get_next_line.h"
-// #include "get_next_line_utils.c"
-
 
 char    *new_sbuf(char *sbuf)
 {
@@ -61,8 +59,6 @@ char    *readl(int fd, char *sbuf)
     char    str[BUFFER_SIZE + 1];
     int     read_result;
 
-    // if (!str)
-    //     return (NULL);
     read_result = 1;
     while (!ft_strchr(sbuf, '\n') && read_result != 0)
     {
@@ -80,7 +76,7 @@ char    *get_next_line(int fd)
     static char *sbuf;
     char        *ret_line;
 
-    if(fd < 0 || BUFFER_SIZE <= 0)
+    if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
     sbuf = readl(fd, sbuf);
     if (!sbuf)
@@ -92,12 +88,3 @@ char    *get_next_line(int fd)
     sbuf = new_sbuf(sbuf);
     return (ret_line);
 }
-
-// int main()
-// {
-//     int fd = open ("file1", O_RDONLY);
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-
-// }
