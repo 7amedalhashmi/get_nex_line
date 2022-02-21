@@ -85,18 +85,18 @@ char	*readl(int fd, char *sbuf)
 
 char	*get_next_line(int fd)
 {
-	static char	*sbuf;
+	static char	*sbuf[1024];
 	char		*ret_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	sbuf = readl(fd, sbuf);
-	if (!sbuf)
+	sbuf[fd] = readl(fd, sbuf[fd]);
+	if (!sbuf[fd])
 	{
-		free (sbuf);
+		free (sbuf[fd]);
 		return (NULL);
 	}
-	ret_line = return_new_line(sbuf);
-	sbuf = new_sbuf(sbuf);
+	ret_line = return_new_line(sbuf[fd]);
+	sbuf[fd] = new_sbuf(sbuf[fd]);
 	return (ret_line);
 }
