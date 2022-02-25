@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*new_sbuf(char *sbuf)
 {
@@ -19,6 +19,8 @@ char	*new_sbuf(char *sbuf)
 	char	*new_buf;
 
 	i = 0;
+	if (!sbuf)
+		return (NULL);
 	while (sbuf[i] && sbuf[i] != '\n')
 		i++;
 	if (!sbuf[i])
@@ -48,7 +50,7 @@ char	*return_new_line(char *sbuf)
 		return (NULL);
 	while (sbuf[i] && sbuf[i] != '\n')
 		i++;
-	ret_line = (char *)malloc((i + 1) * sizeof(char));
+	ret_line = (char *)malloc((i + 2) * sizeof(char));
 	if (!ret_line)
 		return (NULL);
 	i = 0;
@@ -68,18 +70,23 @@ char	*return_new_line(char *sbuf)
 
 char	*readl(int fd, char *sbuf)
 {
-	char	str[BUFFER_SIZE + 1];
+	char	*str;
 	int		read_result;
 
 	read_result = 1;
+	str = malloc (sizeof(char) * BUFFER_SIZE + 1);
 	while (!ft_strchr(sbuf, '\n') && read_result != 0)
 	{
 		read_result = read(fd, str, BUFFER_SIZE);
 		if (read_result < 0)
+		{
+			free(str);
 			return (NULL);
+		}
 		str[read_result] = '\0';
 		sbuf = ft_strjoin(sbuf, str);
 	}
+	free(str);
 	return (sbuf);
 }
 
