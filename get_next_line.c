@@ -6,7 +6,7 @@
 /*   By: halhashm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 20:32:14 by halhashm          #+#    #+#             */
-/*   Updated: 2022/02/21 15:02:28 by halhashm         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:01:13 by halhashm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*new_sbuf(char *sbuf)
 		free (sbuf);
 		return (NULL);
 	}
-	new_buf = (char *)malloc((ft_strlen(sbuf) - i + 1) * sizeof(char));
+	new_buf = malloc(sizeof(char) * (ft_strlen(sbuf) - i + 1));
 	if (!new_buf)
 		return (NULL);
 	i++;
@@ -50,7 +50,7 @@ char	*return_new_line(char *sbuf)
 		return (NULL);
 	while (sbuf[i] && sbuf[i] != '\n')
 		i++;
-	ret_line = (char *)malloc((i + 2) * sizeof(char));
+	ret_line = malloc(sizeof(char) * (i + 2));
 	if (!ret_line)
 		return (NULL);
 	i = 0;
@@ -74,7 +74,7 @@ char	*readl(int fd, char *sbuf)
 	int		read_result;
 
 	read_result = 1;
-	str = malloc (sizeof(char) * BUFFER_SIZE + 1);
+	str = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	while (!ft_strchr(sbuf, '\n') && read_result != 0)
 	{
 		read_result = read(fd, str, BUFFER_SIZE);
